@@ -471,7 +471,7 @@ class S3Client extends AwsClient
                 $args['client']->getEmitter()->attach(new RetrySubscriber(
                     ClientResolver::_wrapDebugLogger($args, [
                         'max'    => $value,
-                        'delay'  => 'GuzzleHttp\Subscriber\Retry\RetrySubscriber::exponentialDelay',
+                        'delay'  => ['GuzzleHttp\Subscriber\Retry\RetrySubscriber', 'exponentialDelay'],
                         'filter' => RetrySubscriber::createChainFilter([
                             new S3TimeoutFilter(),
                             new ThrottlingFilter($args['error_parser']),
